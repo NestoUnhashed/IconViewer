@@ -9,8 +9,6 @@ namespace IconViewer.Logic
         private List<Icon> Icons;
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private static string DefaultColor { get; set; } = "#4d5959";
-
         private bool isValid = false;
         public bool IsValid
         {
@@ -26,10 +24,10 @@ namespace IconViewer.Logic
         }
 
 
-        private string color = DefaultColor;
+        private string color;
         public string Color
         {
-            get { return IsValid ? color : DefaultColor; }
+            get { return IsValid ? color : "#fff"; }
             set
             {
                 if (color == value)
@@ -40,7 +38,7 @@ namespace IconViewer.Logic
             }
         }
 
-        private string text = DefaultColor;
+        private string text;
         public string Text
         {
             get { return text; }
@@ -98,7 +96,8 @@ namespace IconViewer.Logic
 
         public ColorManager(string color)
         {
-            DefaultColor = color;
+            Color = color;
+            Text = color;
         }
 
         public ColorManager(List<Icon> icons, string color)

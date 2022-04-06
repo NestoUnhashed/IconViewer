@@ -17,7 +17,6 @@ namespace IconViewer.Logic
                     return;
 
                 color = value;
-                Config.DefaultColor = color;
             }
         }
 
@@ -47,6 +46,7 @@ namespace IconViewer.Logic
 
         private void SaveChanges()
         {
+            Config.DefaultColor = color;
             Config.UpdateConfig();
         }
 

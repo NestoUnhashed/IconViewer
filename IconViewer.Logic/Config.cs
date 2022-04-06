@@ -68,6 +68,7 @@ namespace IconViewer.Logic
             {
                 var config = (Config)serializer.ReadObject(reader);
                 IconPaths = config.IconPaths;
+                DefaultColor = config.DefaultColor;
 
                 IconPaths.ToList().ForEach(path =>
                 {
