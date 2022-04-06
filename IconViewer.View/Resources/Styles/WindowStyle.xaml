@@ -1,0 +1,66 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:fc="http://devpelux.github.io/fullcontrols">
+
+    <Color x:Key="TitlebarButton.Background.Color">White</Color>
+    <Color x:Key="TitlebarButton.Background.OnMouseOver.Color">#536562</Color>
+    <Color x:Key="TitlebarButton.Foreground.Color">#919191</Color>
+    <Color x:Key="TitlebarButton.Foreground.OnMouseOver.Color">White</Color>
+    
+    
+    <SolidColorBrush x:Key="TitlebarButton.Background" Color="{StaticResource Window.Polygon.Fill.Color}"/>
+    <SolidColorBrush x:Key="TitlebarButton.Background.OnMouseOver" Color="{StaticResource TitlebarButton.Background.OnMouseOver.Color}"/>
+    <SolidColorBrush x:Key="TitlebarButton.Foreground" Color="{StaticResource TitlebarButton.Foreground.Color}"/>
+    <SolidColorBrush x:Key="TitlebarButton.Foreground.OnMouseOver" Color="{StaticResource TitlebarButton.Foreground.OnMouseOver.Color}"/>
+
+
+
+    <Style TargetType="fc:ButtonPlus" x:Key="TitleBar.Buttons.BaseStyle">
+        <Setter Property="Width" Value="48"/>
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="BorderThickness" Value="0"/>
+
+        <Setter Property="Foreground" Value="{StaticResource TitlebarButton.Foreground}"/>
+        <Setter Property="ForegroundOnMouseOver" Value="{StaticResource TitlebarButton.Foreground.OnMouseOver}"/>
+        <Setter Property="ForegroundOnPressed" Value="{StaticResource TitlebarButton.Foreground.OnMouseOver}"/>
+        
+        <Setter Property="Background" Value="{StaticResource TitlebarButton.Background}"/>
+        <Setter Property="BackgroundOnMouseOver" Value="{StaticResource TitlebarButton.Background.OnMouseOver}"/>
+        <Setter Property="BackgroundOnPressed" Value="{StaticResource TitlebarButton.Background.OnMouseOver}"/>
+    </Style>
+
+
+
+    <Style TargetType="fc:ButtonPlus" x:Key="TitleBar.CloseButton" BasedOn="{StaticResource TitleBar.Buttons.BaseStyle}">
+        <Setter Property="BackgroundOnMouseOver" Value="#f64f64"/>
+    </Style>
+
+    <Style TargetType="fc:ButtonPlus" x:Key="TitleBar.MaximizeRestoreButton" BasedOn="{StaticResource TitleBar.Buttons.BaseStyle}">
+        
+    </Style>
+
+    <Style TargetType="fc:ButtonPlus" x:Key="TitleBar.MinimizeButton" BasedOn="{StaticResource TitleBar.Buttons.BaseStyle}">
+        
+    </Style>
+
+
+    <Style TargetType="fc:AvalonWindow" x:Key="MainWindowStyle">
+        <Setter Property="BorderThickness" Value="0"/>
+
+        <Setter Property="MinHeight" Value="400"/>
+        <Setter Property="MinWidth" Value="830"/>
+
+        <Setter Property="Height" Value="600"/>
+        <Setter Property="Width" Value="830"/>
+
+        <Setter Property="Title" Value=""/>
+        <Setter Property="MergeTitlebarAndContent" Value="True"/>
+
+        <Setter Property="MinimizeButtonStyle" Value="{StaticResource TitleBar.MinimizeButton}"/>
+        <Setter Property="RestoreButtonStyle" Value="{StaticResource TitleBar.MaximizeRestoreButton}"/>
+        <Setter Property="MaximizeButtonStyle" Value="{StaticResource TitleBar.MaximizeRestoreButton}"/>
+        <Setter Property="CloseButtonStyle" Value="{StaticResource TitleBar.CloseButton}"/>
+
+    </Style>
+
+</ResourceDictionary>

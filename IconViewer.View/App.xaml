@@ -1,0 +1,19 @@
+﻿<Application x:Class="IconViewer.View.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:IconViewer.View"
+             StartupUri="MainWindow.xaml">
+    
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/Utility.xaml"/>
+
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/WindowStyle.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/CellStyle.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/FooterStyle.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/SettingsStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

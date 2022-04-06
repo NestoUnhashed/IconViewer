@@ -1,0 +1,118 @@
+﻿<fc:AvalonWindow x:Class="IconViewer.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IconViewer.View"
+        xmlns:fc="http://devpelux.github.io/fullcontrols"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Style="{StaticResource MainWindowStyle}">
+
+    <Grid Background="{StaticResource Window.Background}" Name="mainPanel"
+          MouseDown="mainPanel_MouseDown" Focusable="True" ShowGridLines="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+
+        <Frame NavigationUIVisibility="Hidden" Name="Settings_Frame" Panel.ZIndex="1" Visibility="Collapsed"/>
+
+        <Polygon Fill="{StaticResource Window.Polygon.Fill}" HorizontalAlignment="Right">
+            <Polygon.Points>
+                <MultiBinding Converter="{StaticResource DynamicPolygon}">
+                    <Binding ElementName="mainPanel" Path="ActualWidth"/>
+                    <Binding ElementName="mainPanel" Path="ActualHeight"/>
+                </MultiBinding>
+            </Polygon.Points>
+        </Polygon>
+
+
+        <StackPanel Height="50" VerticalAlignment="Top" Orientation="Horizontal">
+            <TextBlock Text="{Binding IconsCount}" Margin="18,18,0,18" Style="{StaticResource Settings.Header.H3}"/>
+            <TextBlock Text="Icons" Margin="4,18,0,18" Style="{StaticResource Settings.Header.H3}"/>
+        </StackPanel>
+            
+        <fc:GlassScrollViewer PlaceScrollBarsInside="true" Padding="50" CanContentScroll="False" VerticalScrollBarForeground="#35413e" VerticalScrollBarAreaPadding="0,50,0,50">
+            <ItemsControl ItemsSource="{Binding IconView}" HorizontalContentAlignment="Center" VerticalContentAlignment="Top">
+                
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource Elements.Cell.Background}">
+
+                            <Border.ContextMenu>
+                                <fc:FlatContextMenu>
+
+                                    <fc:FlatMenuItem Header="Copy Path" Command="{Binding CopyDataCommand}"/>
+                                    <fc:FlatMenuItem Header="Copy File" Command="{Binding CopyFileCommand}"/>
+
+                                    <fc:FlatMenuSeparator/>
+                                    
+                                    <fc:FlatMenuItem Header="Open with">
+                                        <fc:FlatMenuItem Header="Explorer" Command="{Binding OpenInExplorerCommand}"/>
+                                    </fc:FlatMenuItem>
+                                    
+                                </fc:FlatContextMenu>
+                            </Border.ContextMenu>
+                            
+                            <Grid>
+                                <Grid Margin="20">
+                                    <Path Data="{Binding Data, Converter={StaticResource stringToPathData}}" Style="{StaticResource Elements.Cell.Path}"/>
+                                </Grid>
+                                
+                                <Border Style="{StaticResource Elements.Cell.TextCanvas}" ToolTip="{Binding Name}">
+                                    <TextBlock Style="{StaticResource Elements.Cell.FileName}" Text="{Binding Name}" TextWrapping="Wrap"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                
+            </ItemsControl>
+            
+        </fc:GlassScrollViewer>
+
+        <Grid Background="{StaticResource Window.Footer.Background}" Grid.Row="1" HorizontalAlignment="Stretch" MouseDown="mainPanel_MouseDown">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <fc:ButtonPlus Style="{StaticResource Footer.ToolButtons.Update}" Command="{Binding UpdateIconsCommand}">
+                    <Grid Style="{StaticResource Footer.ToolButtons.PathCanvas}">
+                        <Path  Style="{StaticResource Footer.ToolButtons.PathCanvas.Path}"
+                               Data="M25.12,6.73A13.18,13.18,0,0,1,3.4,21.65,13.2,13.2,0,0,1,10.72,1.3l.59,2.19a10.92,10.92,0,1,0,12.13,4.8L20.56,11,18.37,1.46l9.34,2.85Z"/>
+                    </Grid>
+                </fc:ButtonPlus>
+
+                <fc:ToggleButtonPlus Style="{StaticResource Footer.ToolButtons.Picker}" IsChecked="False">
+                    
+                    <StackPanel Orientation="Horizontal">
+                        <Grid Style="{StaticResource Footer.ToolButtons.PathCanvas}">
+                            <Border Background="{Binding ColorManager.Color, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="14" Margin="0,0,2,0" VerticalAlignment="Center" Height="22" CornerRadius="0,15,15,0" BorderThickness="2,0,0,0" BorderBrush="{StaticResource Button.Background}"/>
+                            <Border BorderBrush="{StaticResource Button.Background}" BorderThickness="5" CornerRadius="15">
+                            </Border>
+
+                        </Grid>
+
+                        <fc:TextBoxPlus Style="{StaticResource Footer.ToolButtons.ColorBox}">
+                            <fc:TextBoxPlus.InputBindings>
+                                <KeyBinding Key="Return" Command="{Binding ColorManager.ColorChangedCommand}"/>
+                            </fc:TextBoxPlus.InputBindings>>
+                        </fc:TextBoxPlus>
+                    </StackPanel>
+                </fc:ToggleButtonPlus>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <fc:TextBoxPlus Style="{StaticResource Footer.Searchbar}" Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}"/>
+                <fc:ToggleButtonPlus Style="{StaticResource Footer.Button}" IsChecked="False" Checked="ToggleButtonPlus_Checked" Unchecked="ToggleButtonPlus_Unchecked">
+                    
+                </fc:ToggleButtonPlus>
+            </StackPanel>
+        </Grid>
+        
+    </Grid>
+</fc:AvalonWindow>
