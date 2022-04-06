@@ -27,7 +27,10 @@
         <TextBlock Grid.Column="1" Style="{StaticResource Settings.Header.H1}"/>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <TextBlock Text="Show Icons from" Style="{StaticResource Settings.Header.H2}"/>
+            <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                <TextBlock Text="Show Icons from" Style="{StaticResource Settings.Header.H2}"/>
+                <TextBlock Text="// Add Folders with Icons in order to display them on the Mainpage" Style="{StaticResource Settings.Description}"/>
+            </StackPanel>
 
             <ItemsControl ItemsSource="{Binding Config.IconPaths}" HorizontalContentAlignment="Stretch">
                 <ItemsControl.ItemTemplate>
@@ -52,11 +55,27 @@
 
             <fc:ButtonPlus Content="Add Folder" Command="{Binding AddPathCommand}" Style="{StaticResource Settings.AddPath}"/>
 
-            <TextBlock Text="Default Icon Color" Style="{StaticResource Settings.Header.H2}"/>
-            <TextBox Text="{Binding Color, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Settings.DefaultColor.TextBox}"/>
+            <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                <TextBlock Text="Default Icon Color" Style="{StaticResource Settings.Header.H2}"/>
+                <TextBlock Text="// Sets the default color for future launches" Style="{StaticResource Settings.Description}"/>
+            </StackPanel>
+
+            
+            <StackPanel Orientation="Horizontal" Height="25">
+
+                <Grid>
+                    <TextBox Text="{Binding Color, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Settings.DefaultColor.TextBox}" Visibility="{Binding ElementName=changeDefaultColor, Path=IsChecked, Converter={StaticResource DirectBoolToVisConverter}}"/>
+                    <TextBlock Text="{Binding Color, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Settings.DefaultColor.TextBlock}" Visibility="{Binding ElementName=changeDefaultColor, Path=IsChecked, Converter={StaticResource InvertedBoolToVisConverter}}"/>
+                </Grid>
+
+                <fc:ToggleButtonPlus Name="changeDefaultColor" Grid.Column="1" Style="{StaticResource Settings.ChangeColor.ToggleButton}">
+                    <Path Style="{StaticResource Settings.ChangeColor.Path}"/>
+                </fc:ToggleButtonPlus>
+
+            </StackPanel>
         </StackPanel>
 
-        <fc:ButtonPlus Style="{StaticResource Settings.SaveButton}" Command="{Binding SaveCommand}"/>
+        <fc:ButtonPlus Name="saveSettingsButton" Style="{StaticResource Settings.SaveButton}" Command="{Binding SaveCommand}"/>
 
     </Grid>
 </Page>

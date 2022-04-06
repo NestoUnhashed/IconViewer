@@ -21,6 +21,8 @@
     <converters:StringToGeometryConverter x:Key="stringToPathData"/>
     <converters:DynamicPolygonConverter x:Key="DynamicPolygon"/>
     <converters:InvalidInputConverter x:Key="ValidateInput"/>
+    <converters:InvertedBooleanToVisibilityConverter x:Key="InvertedBoolToVisConverter"/>
+    <BooleanToVisibilityConverter x:Key="DirectBoolToVisConverter"/>
 
     <Style TargetType="TextBlock" x:Key="Rubik.Base">
         <Setter Property="HorizontalAlignment" Value="Center"/>

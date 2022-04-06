@@ -26,9 +26,8 @@
     <Style TargetType="TextBlock" x:Key="Settings.Header.H2">
         <Setter Property="FontSize" Value="22"/>
         <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="0,30,0,0"/>
         <Setter Property="Foreground" Value="{StaticResource Settings.Header}"/>
     </Style>
 
@@ -40,22 +39,6 @@
     </Style>
 
 
-
-
-    <Style TargetType="TextBox" x:Key="Settings.DefaultColor.TextBox">
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="Width" Value="200"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Foreground" Value="{StaticResource Settings.Header}"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="FontFamily" Value="/Resources/Fonts/Rubik/#Rubik"/>
-        <Setter Property="Padding" Value="5,0,0,0"/>
-    </Style>
-    
-    
-    
 
     <Style TargetType="fc:ToggleButtonPlus" x:Key="Settings.IOS.ToggleButton">
         <Setter Property="Height" Value="26"/>
@@ -129,4 +112,90 @@
 
         <Setter Property="Command" Value="{Binding SaveCommand}"/>
     </Style>
+
+
+    <Style TargetType="FrameworkElement" x:Key="Settings.DefaultColor.BaseSize">
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Width" Value="80"/>
+    </Style>
+    
+    <Style TargetType="TextBox" x:Key="Settings.DefaultColor.TextBox" BasedOn="{StaticResource Settings.DefaultColor.BaseSize}">
+        <Setter Property="Foreground" Value="{StaticResource Settings.Header}"/>
+        <Setter Property="FontFamily" Value="/Resources/Fonts/Rubik/#Rubik"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="5,0,0,0"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Background" Value="#eef0e9"/>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="Settings.DefaultColor.TextBlock" BasedOn="{StaticResource Settings.DefaultColor.BaseSize}">
+        <Setter Property="Foreground" Value="#373737"/>
+        <Setter Property="FontFamily" Value="/Resources/Fonts/Rubik/#Rubik"/>
+        <Setter Property="Height" Value="auto"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="8,0,0,0"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="Settings.Description" BasedOn="{StaticResource Rubik.Base}">
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="FontStyle" Value="Italic"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Margin" Value="20,0,0,2"/>
+    </Style>
+
+    <Style TargetType="fc:ToggleButtonPlus" x:Key="Settings.ChangeColor.ToggleButton">
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Margin" Value="20,0,0,0"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BackgroundOnChecked" Value="Transparent"/>
+        <Setter Property="BackgroundOnMouseOver" Value="Transparent"/>
+        <Setter Property="BackgroundOnMouseOverOnChecked" Value="Transparent"/>
+
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=saveSettingsButton, Path=IsMouseCaptured}" Value="true"/>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsChecked}" Value="true"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="IsChecked" Value="False"/>
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style TargetType="Path" x:Key="Settings.ChangeColor.Path">
+        <Setter Property="Stroke" Value="{StaticResource Button.Background}"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=fc:ToggleButtonPlus}, Path=IsChecked}" Value="true">
+                <Setter Property="Data" Value="M8.117 10.226l.707.708-4.781 4.781 4.242 4.242 4.781-4.781.708.707-5.703
+                                        5.703-7.071 1.414 1.414-7.071 5.703-5.703zm1.408-1.408l7.818-7.818 5.657 5.657-7.818 7.818 6.818
+                                        6.818-.707.707-19.293-19.293.707-.707 6.818 6.818zm-1.947 11.847l-4.243-4.243-1.06 5.303
+                                        5.303-1.06zm2.654-11.14l4.243 4.243 7.111-7.111-4.243-4.243-7.111 7.111z"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=fc:ToggleButtonPlus}, Path=IsChecked}" Value="false">
+                <Setter Property="Data" Value="M8.071 21.586l-7.071 1.414 1.414-7.071 14.929-14.929 5.657 5.657-14.929
+                                        14.929zm-.493-.921l-4.243-4.243-1.06 5.303 5.303-1.06zm9.765-18.251l-13.3 13.301 4.242 4.242
+                                        13.301-13.3-4.243-4.243z"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=fc:ToggleButtonPlus}, Path=IsMouseOver}" Value="true">
+                <Setter Property="Stroke" Value="{StaticResource Button.Background.OnMouseOver}"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=fc:ToggleButtonPlus}, Path=IsMouseCaptured}" Value="true">
+                <Setter Property="Stroke" Value="{StaticResource Button.Background.OnPressed}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+           
 </ResourceDictionary>
