@@ -4,3 +4,5 @@ IconViewer.View/bin/
 IconViewer.View/obj/
 IconViewer.Logic/bin/
 IconViewer.View/Properties/
+*.pubxml
+IconViewer.Logic/Properties/

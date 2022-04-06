@@ -32,7 +32,7 @@
     </Style>
 
     <Style TargetType="ToolTip">
-        <Setter Property="Background" Value="{StaticResource Cell.Background}"/>
-        <Setter Property="Foreground" Value="{StaticResource Settings.Header}"/>
+        <Setter Property="Background" Value="{DynamicResource Cell.Background}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Settings.Header}"/>
     </Style>
 </ResourceDictionary>
