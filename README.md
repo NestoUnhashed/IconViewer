@@ -30,6 +30,6 @@ By default, every new Path added is enabled.
 3. In the Icons Context menu you get the Option you Copy the File itself, the Icons PathData to the Clipboard or open the File in the Explorer. 
 4. Refreshes the Icons Collection. 
 5. Changes the Color or all Icons _temporary_.  
-    - For a _permanent_ Changed modify the Value found in the Settings.
+    - For a _permanent_ Change modify the Value found in the Settings.
 6. Search Icons by their Filename. 
 7. Opens/Closes the Settings. 
