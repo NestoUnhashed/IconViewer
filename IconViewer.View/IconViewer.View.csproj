@@ -9,6 +9,13 @@
 	
     <PropertyGroup>
 	    <LangVersion>9.0</LangVersion>
+	    <Product>IconViewer</Product>
+	    <Authors>Ernesto Danzer</Authors>
+	    <RepositoryUrl>https://github.com/NestoUnhashed/IconViewer</RepositoryUrl>
+	    <RepositoryType>git</RepositoryType>
+	    <PackageId></PackageId>
+	    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+	    <AssemblyName>IconViewer</AssemblyName>
     </PropertyGroup>
 
   <ItemGroup>

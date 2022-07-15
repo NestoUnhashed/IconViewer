@@ -102,9 +102,21 @@ namespace IconViewer.Logic
 
             paths.Where(path => path.Value.IsOn).ToList().ForEach(path =>
             {
-                files.AddRange(Directory.GetFiles(path.Key)
+                if (Directory.Exists(path.Key))
+                {
+                    files.AddRange(Directory.GetFiles(path.Key)
                      .Where(file => Path.GetExtension(file).ToLower() == ".svg")
                      .Select(vector => new FileInfo(vector)));
+
+                    return;
+                }
+
+                path.Value.DeletePathCommand.Execute(path.Key);
+                
+                if(Icons == null)
+                    Icons = new ObservableCollection<Icon>();
+
+                UpdateIcons(this, null);
             });
 
             return files.Select(file => new Icon(file.FullName, ColorManager.Color)).Where(icon => icon.IsValid).ToObservable();

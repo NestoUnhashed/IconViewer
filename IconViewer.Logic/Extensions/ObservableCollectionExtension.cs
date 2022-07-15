@@ -23,6 +23,9 @@ namespace IconViewer.Logic.Extensions
         /// <param name="newCollection"></param>
         internal static void Update<T>(this ObservableCollection<T> oldCollection, ObservableCollection<T> newCollection)
         {
+            if (oldCollection == null)
+                oldCollection = new ObservableCollection<T>();
+
             oldCollection.Clear();
             oldCollection.AddRange(newCollection);
         }

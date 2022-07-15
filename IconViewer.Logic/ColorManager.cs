@@ -23,7 +23,6 @@ namespace IconViewer.Logic
             }
         }
 
-
         private string color;
         public string Color
         {
