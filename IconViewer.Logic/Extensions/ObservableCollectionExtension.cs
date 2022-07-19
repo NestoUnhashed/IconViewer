@@ -12,7 +12,7 @@ namespace IconViewer.Logic.Extensions
         /// <returns></returns>
         internal static bool Empty<T>(this ObservableCollection<T> collection)
         {
-            return collection.Count == 0 ? true : false;
+            return collection.Count == 0;
         }
 
         /// <summary>

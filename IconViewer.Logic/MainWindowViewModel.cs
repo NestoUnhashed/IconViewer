@@ -42,7 +42,7 @@ namespace IconViewer.Logic
                 if (searchTerm == value)
                     return;
 
-                searchTerm = value;
+                searchTerm = value.ToLower();
                 iconView.Refresh();
             }
         }
@@ -75,7 +75,7 @@ namespace IconViewer.Logic
             Icons = SearchForIconsIn(config.IconPaths);
             IconsCount = Icons.Count();
             iconView = CollectionViewSource.GetDefaultView(Icons);
-            iconView.Filter = new Predicate<object>(x => ((Icon)x).Name.Matches(SearchTerm));
+            iconView.Filter = new Predicate<object>(x => string.IsNullOrWhiteSpace(SearchTerm) || ((Icon)x).Name.Matches(SearchTerm));
 
             config.IconPaths.CollectionChanged += UpdateIcons;
 
