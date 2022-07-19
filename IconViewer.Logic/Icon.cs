@@ -18,46 +18,28 @@ namespace IconViewer.Logic
         public string PathColor { get; set; }
         private readonly string? parentFolder;
         public bool IsValid = true;
-        internal static StringCollection CopiedFile = new StringCollection();
+        internal static StringCollection CopiedFile = new();
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private readonly DataContractSerializer serializer = new DataContractSerializer(typeof(XElement));
+        private readonly DataContractSerializer serializer = new(typeof(XElement));
 
         private readonly ICommand copyFileCommand;
-        public ICommand CopyFileCommand
-        {
-            get
-            {
-                return copyFileCommand ?? new RelayCommand(
+        public ICommand CopyFileCommand => copyFileCommand ?? new RelayCommand(
                         x => true,
                         x => Clipboard.SetFileDropList(CopiedFile.SetFile(FilePath))
                     );
-            }
-        }
 
         private readonly ICommand copyDataCommand;
-        public ICommand CopyDataCommand
-        {
-            get
-            {
-                return copyDataCommand ?? new RelayCommand(
+        public ICommand CopyDataCommand => copyDataCommand ?? new RelayCommand(
                         x => true,
                         x => Clipboard.SetText(Data)
                     );
-            }
-        }
 
         private readonly ICommand openInExplorerCommand;
-        public ICommand OpenInExplorerCommand
-        {
-            get
-            {
-                return openInExplorerCommand ?? new RelayCommand(
+        public ICommand OpenInExplorerCommand => openInExplorerCommand ?? new RelayCommand(
                         x => Directory.Exists(parentFolder),
                         x => Utility.OpenInExplorer(FilePath, FileType.File)
                     );
-            }
-        }
 
         public Icon(string path)
         {
@@ -81,24 +63,25 @@ namespace IconViewer.Logic
 
         public string GetPathData()
         {
-            using (XmlReader reader = XmlReader.Create(FilePath))
+            using XmlReader reader = XmlReader.Create(FilePath);
+            string data = string.Empty;
+
+            try
             {
-                string data = String.Empty;
-
-                try
-                {
-                    XElement svgData = serializer.ReadObject(reader) as XElement ?? throw new ArgumentNullException($"The File {FilePath} is not valid, make sure it contains a Path Tag.");
-                    data = svgData.Element(XName.Get("path", @"http://www.w3.org/2000/svg")).Attribute(XName.Get("d")).Value;
-                }
-                catch (Exception)
-                {
-                    IsValid = false;
-                }
-
-                return data;
+                XElement svgData = serializer.ReadObject(reader) as XElement ?? throw new ArgumentNullException($"The File {FilePath} is not valid, make sure it contains a Path Tag.");
+                data = svgData.Element(XName.Get("path", @"http://www.w3.org/2000/svg")).Attribute(XName.Get("d")).Value;
             }
+            catch (Exception)
+            {
+                IsValid = false;
+            }
+
+            return data;
         }
 
-        public void RisePropertyChanged(string property) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        public void RisePropertyChanged(string property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
     }
 }

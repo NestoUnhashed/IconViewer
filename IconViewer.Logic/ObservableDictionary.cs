@@ -64,8 +64,7 @@ namespace IconViewer.Logic
 
         private bool RemoveWithNotification(TKey key)
         {
-            TValue value;
-            if (dictionary.TryGetValue(key, out value) && dictionary.Remove(key))
+            if (dictionary.TryGetValue(key, out TValue value) && dictionary.Remove(key))
             {
                 CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
                 PropertyChanged(this, new PropertyChangedEventArgs("Count"));
@@ -80,8 +79,7 @@ namespace IconViewer.Logic
 
         private void UpdateWithNotification(TKey key, TValue value)
         {
-            TValue existing;
-            if (dictionary.TryGetValue(key, out existing))
+            if (dictionary.TryGetValue(key, out TValue existing))
             {
                 dictionary[key] = value;
 
@@ -132,10 +130,7 @@ namespace IconViewer.Logic
         /// Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the <see cref="T:System.Collections.Generic.IDictionary`2" />.
         /// </summary>
         /// <returns>An <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the object that implements <see cref="T:System.Collections.Generic.IDictionary`2" />.</returns>
-        public ICollection<TKey> Keys
-        {
-            get { return dictionary.Keys; }
-        }
+        public ICollection<TKey> Keys => dictionary.Keys;
 
         /// <summary>
         /// Removes the element with the specified key from the <see cref="T:System.Collections.Generic.IDictionary`2" />.
@@ -166,10 +161,7 @@ namespace IconViewer.Logic
         /// Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the <see cref="T:System.Collections.Generic.IDictionary`2" />.
         /// </summary>
         /// <returns>An <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the object that implements <see cref="T:System.Collections.Generic.IDictionary`2" />.</returns>
-        public ICollection<TValue> Values
-        {
-            get { return dictionary.Values; }
-        }
+        public ICollection<TValue> Values => dictionary.Values;
 
         /// <summary>
         /// Gets or sets the element with the specified key.
@@ -178,8 +170,8 @@ namespace IconViewer.Logic
         /// <returns></returns>
         public TValue this[TKey key]
         {
-            get { return dictionary[key]; }
-            set { UpdateWithNotification(key, value); }
+            get => dictionary[key];
+            set => UpdateWithNotification(key, value);
         }
 
         #endregion
@@ -211,15 +203,9 @@ namespace IconViewer.Logic
             dictionary.CopyTo(array, arrayIndex);
         }
 
-        int ICollection<KeyValuePair<TKey, TValue>>.Count
-        {
-            get { return dictionary.Count; }
-        }
+        int ICollection<KeyValuePair<TKey, TValue>>.Count => dictionary.Count;
 
-        bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly
-        {
-            get { return dictionary.IsReadOnly; }
-        }
+        bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly => dictionary.IsReadOnly;
 
         bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item)
         {

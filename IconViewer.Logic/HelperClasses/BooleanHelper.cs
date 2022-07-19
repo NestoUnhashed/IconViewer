@@ -9,42 +9,34 @@ namespace IconViewer.Logic.HelperClasses
 
 
         private readonly ICommand openPathCommand;
-        public ICommand OpenPathCommand
-        {
-            get
-            {
-                return openPathCommand ?? new RelayCommand(
+        public ICommand OpenPathCommand => openPathCommand ?? new RelayCommand(
                     x => true,
                     x => Utility.OpenInExplorer(collection.First(kvp => kvp.Value == this).Key, FileType.Folder)
                     );
-            }
-        }
 
         private readonly ICommand deletePathCommand;
-        public ICommand DeletePathCommand
-        {
-            get
-            {
-                return deletePathCommand ?? new RelayCommand(
+        public ICommand DeletePathCommand => deletePathCommand ?? new RelayCommand(
                     x => true,
                     x => config.RiseDeletionEvent(this)
                     );
-            }
-        }
 
         private bool isOn;
         public bool IsOn
         {
-            get { return isOn; }
+            get => isOn;
             set
             {
                 if (isOn == value)
+                {
                     return;
+                }
 
                 isOn = value;
 
                 if (collection == null)
+                {
                     return;
+                }
 
                 collection.RiseCollectionChanged();
             }

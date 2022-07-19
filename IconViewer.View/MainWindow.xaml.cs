@@ -25,7 +25,7 @@ namespace IconViewer.View
 
         private void mainPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            mainPanel.Focus();
+            _ = mainPanel.Focus();
         }
 
         private void ToggleButtonPlus_Checked(object sender, RoutedEventArgs e)

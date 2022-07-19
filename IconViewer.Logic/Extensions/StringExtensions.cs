@@ -20,7 +20,7 @@ namespace IconViewer.Logic.Extensions
         internal static StringCollection SetFile(this StringCollection collection, string path)
         {
             collection.Clear();
-            collection.Add(path);
+            _ = collection.Add(path);
 
             return collection;
         }

@@ -12,11 +12,13 @@ namespace IconViewer.Logic
         private bool isValid = false;
         public bool IsValid
         {
-            get { return isValid; }
+            get => isValid;
             set
             {
                 if (isValid == value)
+                {
                     return;
+                }
 
                 isValid = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsValid)));
@@ -26,11 +28,13 @@ namespace IconViewer.Logic
         private string color;
         public string Color
         {
-            get { return IsValid ? color : "#fff"; }
+            get => IsValid ? color : "#fff";
             set
             {
                 if (color == value)
+                {
                     return;
+                }
 
                 color = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Color)));
@@ -40,17 +44,21 @@ namespace IconViewer.Logic
         private string text;
         public string Text
         {
-            get { return text; }
+            get => text;
             set
             {
                 if (text == value)
+                {
                     return;
+                }
 
                 Validate(value);
                 text = value;
 
                 if (IsValid)
+                {
                     Color = text;
+                }
             }
         }
 
@@ -70,16 +78,10 @@ namespace IconViewer.Logic
         }
 
         private readonly ICommand colorChangedCommand;
-        public ICommand ColorChangedCommand
-        {
-            get
-            {
-                return colorChangedCommand ?? new RelayCommand(
+        public ICommand ColorChangedCommand => colorChangedCommand ?? new RelayCommand(
                     x => true,
                     x => SetPathColor()
                     );
-            }
-        }
 
         public ColorManager()
         {
@@ -121,7 +123,9 @@ namespace IconViewer.Logic
         private void SetPathColor()
         {
             if (Icons.Count == 0)
+            {
                 return;
+            }
 
             Icons.ForEach(icon =>
             {

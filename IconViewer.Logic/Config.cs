@@ -22,8 +22,8 @@ namespace IconViewer.Logic
         private string AppDataFolderPath { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         private event EventHandler<BooleanHelper> DeletePath;
 
-        private readonly DataContractSerializer serializer = new DataContractSerializer(typeof(Config));
-        private readonly XmlWriterSettings settings = new XmlWriterSettings()
+        private readonly DataContractSerializer serializer = new(typeof(Config));
+        private readonly XmlWriterSettings settings = new()
         {
             Indent = true,
             NewLineOnAttributes = true,
@@ -36,21 +36,23 @@ namespace IconViewer.Logic
             ProjectFolder = Path.Combine(CreatorFolder, "IconViewer");
             FileName = Path.Combine(ProjectFolder, "IconViewer.config");
 
-            RetrieveExistingConfig();
+            _ = RetrieveExistingConfig();
             DeletePath += RemoveRecord;
         }
 
         private void RemoveRecord(object? sender, BooleanHelper e)
         {
             if (e is null)
+            {
                 throw new ArgumentNullException(nameof(e));
+            }
 
-            IconPaths.Remove(IconPaths.First(kvp => kvp.Value == e).Key);
+            _ = IconPaths.Remove(IconPaths.First(kvp => kvp.Value == e).Key);
         }
 
         internal void AddPath(string fileName)
         {
-            if(!IconPaths.ContainsKey(fileName))
+            if (!IconPaths.ContainsKey(fileName))
             {
                 IconPaths.Add(fileName, new BooleanHelper(true, IconPaths));
                 IconPaths[fileName].SetCollection(IconPaths);
@@ -61,7 +63,9 @@ namespace IconViewer.Logic
         private bool RetrieveExistingConfig()
         {
             if (!IsValid())
+            {
                 return false;
+            }
 
             using (XmlReader reader = XmlReader.Create(FileName))
             {
@@ -81,10 +85,8 @@ namespace IconViewer.Logic
 
         public void UpdateConfig()
         {
-            using (XmlWriter writer = XmlWriter.Create(FileName, settings))
-            {
-                serializer.WriteObject(writer, this);
-            }
+            using XmlWriter writer = XmlWriter.Create(FileName, settings);
+            serializer.WriteObject(writer, this);
         }
 
         public bool IsValid()
@@ -97,7 +99,9 @@ namespace IconViewer.Logic
             try
             {
                 if (!File.Exists(FileName))
+                {
                     UpdateConfig();
+                }
 
                 return true;
             }
@@ -113,12 +117,11 @@ namespace IconViewer.Logic
             DirectoryInfo directoryInfo;
             DirectorySecurity directorySecurity;
             AccessRule rule;
-            SecurityIdentifier securityIdentifier = new SecurityIdentifier(WellKnownSidType.BuiltinUsersSid, null);
+            SecurityIdentifier securityIdentifier = new(WellKnownSidType.BuiltinUsersSid, null);
 
             if (!Directory.Exists(folder))
             {
                 directoryInfo = Directory.CreateDirectory(folder);
-                bool modified;
                 directorySecurity = directoryInfo.GetAccessControl();
                 rule = new FileSystemAccessRule(
                         securityIdentifier,
@@ -126,8 +129,7 @@ namespace IconViewer.Logic
                         FileSystemRights.ReadAndExecute |
                         FileSystemRights.Modify,
                         AccessControlType.Allow);
-
-                directorySecurity.ModifyAccessRule(AccessControlModification.Add, rule, out modified);
+                _ = directorySecurity.ModifyAccessRule(AccessControlModification.Add, rule, out _);
                 directoryInfo.SetAccessControl(directorySecurity);
             }
 

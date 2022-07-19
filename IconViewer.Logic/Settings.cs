@@ -10,39 +10,29 @@ namespace IconViewer.Logic
         private string color;
         public string Color
         {
-            get { return color; }
-            set 
+            get => color;
+            set
             {
                 if (color == value)
+                {
                     return;
+                }
 
                 color = value;
             }
         }
 
         private readonly ICommand addPathCommand;
-        public ICommand AddPathCommand
-        {
-            get
-            {
-                return addPathCommand ?? new RelayCommand(
+        public ICommand AddPathCommand => addPathCommand ?? new RelayCommand(
                     x => true,
                     x => OpenFolderPicker()
                     );
-            }
-        }
 
         private readonly ICommand saveCommand;
-        public ICommand SaveCommand
-        {
-            get
-            {
-                return saveCommand ?? new RelayCommand(
+        public ICommand SaveCommand => saveCommand ?? new RelayCommand(
                     x => true,
                     x => SaveChanges()
                     );
-            }
-        }
 
         private void SaveChanges()
         {
@@ -58,7 +48,7 @@ namespace IconViewer.Logic
 
         private void OpenFolderPicker()
         {
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog()
+            CommonOpenFileDialog dialog = new()
             {
                 Title = "Select a Folder containing Icons",
                 IsFolderPicker = true,
@@ -67,7 +57,9 @@ namespace IconViewer.Logic
             };
 
             if (dialog.ShowDialog() != CommonFileDialogResult.Ok)
+            {
                 return;
+            }
 
             Config.AddPath(dialog.FileName);
         }

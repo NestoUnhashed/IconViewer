@@ -9,10 +9,7 @@ namespace IconViewer.View.Resources.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
-
-            return (bool)value ? Visibility.Hidden : Visibility.Visible;
+            return value is null ? throw new ArgumentNullException(nameof(value)) : (object)((bool)value ? Visibility.Hidden : Visibility.Visible);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

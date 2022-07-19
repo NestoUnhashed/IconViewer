@@ -8,15 +8,14 @@ namespace IconViewer.View.Resources.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value == null)
+            if (value == null)
+            {
                 return 0;
+            }
 
             bool isValid = (bool)value;
 
-            if (!isValid)
-                return 0;
-            else
-                return 1;
+            return !isValid ? 0 : (object)1;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

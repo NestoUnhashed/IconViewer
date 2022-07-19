@@ -16,7 +16,7 @@ namespace IconViewer.Logic
         public ColorManager ColorManager { get; private set; }
         public Settings Settings { get; private set; }
 
-        private readonly Config config = new Config();
+        private readonly Config config = new();
         public string DefaultColor { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -24,7 +24,7 @@ namespace IconViewer.Logic
         private int iconsCount;
         public int IconsCount
         {
-            get { return iconsCount; }
+            get => iconsCount;
             private set
             {
                 iconsCount = value;
@@ -32,37 +32,29 @@ namespace IconViewer.Logic
             }
         }
 
-        private string searchTerm = String.Empty;
+        private string searchTerm = string.Empty;
         public string SearchTerm
         {
-            get { return searchTerm; }
+            get => searchTerm;
             set
             {
                 if (searchTerm == value)
+                {
                     return;
+                }
 
                 searchTerm = value.ToLower();
-                iconView.Refresh();
+                IconView.Refresh();
             }
         }
 
         private readonly ICommand updateIconsCommand;
-        public ICommand UpdateIconsCommand
-        {
-            get
-            {
-                return updateIconsCommand ?? new RelayCommand(
+        public ICommand UpdateIconsCommand => updateIconsCommand ?? new RelayCommand(
                     x => true,
                     x => UpdateIcons(this, EventArgs.Empty)
                     );
-            }
-        }
 
-        private readonly ICollectionView iconView;
-        public ICollectionView IconView
-        {
-            get { return iconView; }
-        }
+        public ICollectionView IconView { get; }
 
 
         public MainWindowViewModel()
@@ -73,13 +65,15 @@ namespace IconViewer.Logic
 
             Icons = SearchForIconsIn(config.IconPaths);
             IconsCount = Icons.Count();
-            iconView = CollectionViewSource.GetDefaultView(Icons);
-            iconView.Filter = new Predicate<object>(x => string.IsNullOrWhiteSpace(SearchTerm) || ((Icon)x).Name.Matches(SearchTerm));
+            IconView = CollectionViewSource.GetDefaultView(Icons);
+            IconView.Filter = new Predicate<object>(x => string.IsNullOrWhiteSpace(SearchTerm) || ((Icon)x).Name.Matches(SearchTerm));
 
             config.IconPaths.CollectionChanged += UpdateIcons;
 
             if (Icons.Empty())
+            {
                 return;
+            }
 
             ColorManager.SetIcons(Icons);
         }
@@ -90,14 +84,16 @@ namespace IconViewer.Logic
             IconsCount = Icons.Count();
 
             if (Icons.Empty())
+            {
                 return;
+            }
 
             ColorManager.SetIcons(Icons);
         }
 
         private ObservableCollection<Icon> SearchForIconsIn(ObservableDictionary<string, BooleanHelper> paths)
         {
-            List<FileInfo>? files = new List<FileInfo>();
+            List<FileInfo>? files = new();
 
             paths.Where(path => path.Value.IsOn).ToList().ForEach(path =>
             {
@@ -111,9 +107,11 @@ namespace IconViewer.Logic
                 }
 
                 path.Value.DeletePathCommand.Execute(path.Key);
-                
-                if(Icons == null)
+
+                if (Icons == null)
+                {
                     Icons = new ObservableCollection<Icon>();
+                }
 
                 UpdateIcons(this, null);
             });

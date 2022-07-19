@@ -9,10 +9,7 @@ namespace IconViewer.View.Resources.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value == null)
-                return Geometry.Empty;
-
-            return Geometry.Parse(value.ToString());
+            return value == null ? Geometry.Empty : (object)Geometry.Parse(value.ToString());
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

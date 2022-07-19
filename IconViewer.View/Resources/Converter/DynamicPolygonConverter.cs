@@ -11,7 +11,9 @@ namespace IconViewer.View.Resources.Converter
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (values.Length == 0)
+            {
                 return null;
+            }
 
             double width = Math.Round((double)values[0] / 1.5, 0);
             double height = Math.Round((double)values[1] / 2, 0);
