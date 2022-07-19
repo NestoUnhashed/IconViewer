@@ -6,7 +6,7 @@ namespace IconViewer.Logic.Extensions
     {
         internal static bool Matches(this string value, string args)
         {
-            return value.ToLower().Contains(args.Split(' ', StringSplitOptions.RemoveEmptyEntries));
+            return value.Contains(args.Split(' ', StringSplitOptions.RemoveEmptyEntries));
         }
 
         internal static bool Contains(this string value, IEnumerable<string> args)

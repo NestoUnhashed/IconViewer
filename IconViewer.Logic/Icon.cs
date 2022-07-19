@@ -62,7 +62,7 @@ namespace IconViewer.Logic
         public Icon(string path)
         {
             FilePath = path ?? throw new ArgumentNullException(nameof(path));
-            Name = Path.GetFileNameWithoutExtension(FilePath);
+            Name = Path.GetFileNameWithoutExtension(FilePath).ToLower();
             Data = GetPathData();
 
             parentFolder = Path.GetDirectoryName(FilePath);
@@ -71,7 +71,7 @@ namespace IconViewer.Logic
         public Icon(string path, string color) : this(path)
         {
             FilePath = path ?? throw new ArgumentNullException(nameof(path));
-            Name = Path.GetFileNameWithoutExtension(FilePath);
+            Name = Path.GetFileNameWithoutExtension(FilePath).ToLower();
             Data = GetPathData();
 
             parentFolder = Path.GetDirectoryName(FilePath);
