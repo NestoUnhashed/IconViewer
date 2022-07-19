@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Windows.Data;
 using System.Windows.Input;
-using Xamarin.Forms.Dynamic;
 
 namespace IconViewer.Logic
 {
@@ -98,7 +97,7 @@ namespace IconViewer.Logic
 
         private ObservableCollection<Icon> SearchForIconsIn(ObservableDictionary<string, BooleanHelper> paths)
         {
-            var files = new List<FileInfo>();
+            List<FileInfo>? files = new List<FileInfo>();
 
             paths.Where(path => path.Value.IsOn).ToList().ForEach(path =>
             {

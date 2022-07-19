@@ -1,5 +1,4 @@
 ﻿using System.Windows.Input;
-using Xamarin.Forms.Dynamic;
 
 namespace IconViewer.Logic.HelperClasses
 {

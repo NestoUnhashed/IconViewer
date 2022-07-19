@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Xml;
-using Xamarin.Forms.Dynamic;
 
 namespace IconViewer.Logic
 {
@@ -66,7 +65,7 @@ namespace IconViewer.Logic
 
             using (XmlReader reader = XmlReader.Create(FileName))
             {
-                var config = (Config)serializer.ReadObject(reader);
+                Config? config = (Config)serializer.ReadObject(reader);
                 IconPaths = config.IconPaths;
                 DefaultColor = config.DefaultColor;
 

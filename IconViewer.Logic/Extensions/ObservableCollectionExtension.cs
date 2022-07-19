@@ -32,7 +32,7 @@ namespace IconViewer.Logic.Extensions
 
         internal static void AddRange<T>(this ObservableCollection<T> list, ObservableCollection<T> argument)
         {
-            foreach(var item in argument)
+            foreach(T? item in argument)
                 list.Add(item);
         }
     }

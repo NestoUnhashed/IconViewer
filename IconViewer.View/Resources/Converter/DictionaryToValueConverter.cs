@@ -12,7 +12,7 @@ namespace IconViewer.View.Resources.Converter
             if (value == null)
                 return false;
 
-            var item = (KeyValuePair<string, bool>)value;
+            KeyValuePair<string, bool> item = (KeyValuePair<string, bool>)value;
             return false;
         }
 
