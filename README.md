@@ -26,10 +26,10 @@ By default, every new Path added is enabled.
 <img src=https://user-images.githubusercontent.com/97343298/171417234-3de7e900-5450-43d7-98ce-cf51b8f83fcd.png width="623" height="450">
 
 1. Amount of Icons currently displayed. 
-2. A single Icon-Cell, displays the Filename on Mouseover and has a Context menu. 
-3. In the Icons Context menu you get the Option you Copy the File itself, the Icons PathData to the Clipboard or open the File in the Explorer. 
-4. Refreshes the Icons Collection. 
-5. Changes the Color or all Icons _temporary_.  
+2. A single Icon-Cell, displays the Filename on Mouseover and has it's own Context menu. 
+3. In the Icons Context menu you get the Option to Copy the File itself, the Icons PathData to the Clipboard or open the File in the Explorer. 
+4. Refreshes the Icons Collection.
+5. Changes the Color or all Icons _temporary_.
     - For a _permanent_ Change modify the Value found in the Settings.
 6. Search Icons by their Filename. 
 7. Opens/Closes the Settings. 
