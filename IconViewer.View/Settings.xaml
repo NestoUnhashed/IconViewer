@@ -64,8 +64,8 @@
             <StackPanel Orientation="Horizontal" Height="25">
 
                 <Grid>
-                    <TextBox Text="{Binding Color, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Settings.DefaultColor.TextBox}" Visibility="{Binding ElementName=changeDefaultColor, Path=IsChecked, Converter={StaticResource DirectBoolToVisConverter}}"/>
-                    <TextBlock Text="{Binding Color, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Settings.DefaultColor.TextBlock}" Visibility="{Binding ElementName=changeDefaultColor, Path=IsChecked, Converter={StaticResource InvertedBoolToVisConverter}}"/>
+                    <TextBox Text="{Binding Config.DefaultColor, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Settings.DefaultColor.TextBox}" Visibility="{Binding ElementName=changeDefaultColor, Path=IsChecked, Converter={StaticResource DirectBoolToVisConverter}}"/>
+                    <TextBlock Text="{Binding Config.DefaultColor, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Settings.DefaultColor.TextBlock}" Visibility="{Binding ElementName=changeDefaultColor, Path=IsChecked, Converter={StaticResource InvertedBoolToVisConverter}}"/>
                 </Grid>
 
                 <fc:ToggleButtonPlus Name="changeDefaultColor" Grid.Column="1" Style="{StaticResource Settings.ChangeColor.ToggleButton}">

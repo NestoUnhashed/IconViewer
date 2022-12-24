@@ -13,13 +13,12 @@ namespace IconViewer.Logic
         //#4d5959 Default
 
         public ObservableCollection<Icon> Icons { get; private set; }
+        public ICollectionView IconView { get; private set; }
         public ColorManager ColorManager { get; private set; }
         public Settings Settings { get; private set; }
 
-        private readonly Config config = new();
-        public string DefaultColor { get; set; }
+        private readonly Config config = new Config();
         public event PropertyChangedEventHandler? PropertyChanged;
-
 
         private int iconsCount;
         public int IconsCount
@@ -48,20 +47,10 @@ namespace IconViewer.Logic
             }
         }
 
-        private readonly ICommand updateIconsCommand;
-        public ICommand UpdateIconsCommand => updateIconsCommand ?? new RelayCommand(
-                    x => true,
-                    x => UpdateIcons(this, EventArgs.Empty)
-                    );
-
-        public ICollectionView IconView { get; }
-
-
         public MainWindowViewModel()
         {
-            DefaultColor = config.DefaultColor;
-            Settings = new Settings(config, DefaultColor);
-            ColorManager = new ColorManager(DefaultColor);
+            Settings = new Settings(config);
+            ColorManager = new ColorManager(config.DefaultColor);
 
             Icons = SearchForIconsIn(config.IconPaths);
             IconsCount = Icons.Count();

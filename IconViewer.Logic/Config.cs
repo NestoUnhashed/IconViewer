@@ -13,9 +13,9 @@ namespace IconViewer.Logic
     {
         [DataMember]
         public ObservableDictionary<string, BooleanHelper> IconPaths { get; set; } = new ObservableDictionary<string, BooleanHelper>();
+
         [DataMember]
         public string DefaultColor { get; set; } = "#4d5959";
-
         private readonly string FileName;
         private readonly string CreatorFolder;
         private readonly string ProjectFolder;

@@ -79,40 +79,24 @@
         </fc:GlassScrollViewer>
 
         <Grid Background="{StaticResource Window.Footer.Background}" Grid.Row="1" HorizontalAlignment="Stretch" MouseDown="mainPanel_MouseDown">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <fc:ButtonPlus Style="{StaticResource Footer.ToolButtons.Update}" Command="{Binding UpdateIconsCommand}">
-                    <Grid Style="{StaticResource Footer.ToolButtons.PathCanvas}">
-                        <Path  Style="{StaticResource Footer.ToolButtons.PathCanvas.Path}"
-                               Data="M25.12,6.73A13.18,13.18,0,0,1,3.4,21.65,13.2,13.2,0,0,1,10.72,1.3l.59,2.19a10.92,10.92,0,1,0,12.13,4.8L20.56,11,18.37,1.46l9.34,2.85Z"/>
-                    </Grid>
-                </fc:ButtonPlus>
+            
+            <StackPanel Orientation="Horizontal" Margin="10,0,10,0" HorizontalAlignment="Left">
+                <Border Style="{StaticResource Footer.ColorPicker.Border}"/>
 
-                <fc:ToggleButtonPlus Style="{StaticResource Footer.ToolButtons.Picker}" IsChecked="False">
-                    
-                    <StackPanel Orientation="Horizontal">
-                        <Grid Style="{StaticResource Footer.ToolButtons.PathCanvas}">
-                            <Border Background="{Binding ColorManager.Color, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="14" Margin="0,0,2,0" VerticalAlignment="Center" Height="22" CornerRadius="0,15,15,0" BorderThickness="2,0,0,0" BorderBrush="{StaticResource Button.Background}"/>
-                            <Border BorderBrush="{StaticResource Button.Background}" BorderThickness="5" CornerRadius="15">
-                            </Border>
-
-                        </Grid>
-
-                        <fc:TextBoxPlus Style="{StaticResource Footer.ToolButtons.ColorBox}">
-                            <fc:TextBoxPlus.InputBindings>
-                                <KeyBinding Key="Return" Command="{Binding ColorManager.ColorChangedCommand}"/>
-                            </fc:TextBoxPlus.InputBindings>>
-                        </fc:TextBoxPlus>
-                    </StackPanel>
-                </fc:ToggleButtonPlus>
+                <fc:TextBoxPlus Style="{StaticResource Footer.ColorPicker}" Name="FooterHexBox">
+                    <fc:TextBoxPlus.InputBindings>
+                        <KeyBinding Key="Return" Command="{Binding ColorManager.ColorChangedCommand}"/>
+                    </fc:TextBoxPlus.InputBindings>
+                </fc:TextBoxPlus>
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <fc:TextBoxPlus Style="{StaticResource Footer.Searchbar}" Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}"/>
-                <fc:ToggleButtonPlus Style="{StaticResource Footer.Button}" IsChecked="False" Checked="ToggleButtonPlus_Checked" Unchecked="ToggleButtonPlus_Unchecked">
-                    
-                </fc:ToggleButtonPlus>
+                <fc:ToggleButtonPlus Style="{StaticResource Footer.Button}" IsChecked="False" Checked="ToggleButtonPlus_Checked" Unchecked="ToggleButtonPlus_Unchecked"/>
             </StackPanel>
+            
         </Grid>
+        
         
     </Grid>
 </fc:AvalonWindow>

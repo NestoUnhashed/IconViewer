@@ -28,7 +28,7 @@ namespace IconViewer.Logic
         private string color;
         public string Color
         {
-            get => IsValid ? color : "#fff";
+            get => IsValid ? color : "#000";
             set
             {
                 if (color == value)
@@ -37,6 +37,8 @@ namespace IconViewer.Logic
                 }
 
                 color = value;
+
+                ColorChangedCommand.Execute(null);
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Color)));
             }
         }
@@ -48,12 +50,9 @@ namespace IconViewer.Logic
             set
             {
                 if (text == value)
-                {
                     return;
-                }
 
-                Validate(value);
-                text = value;
+                Validate(value, out text);
 
                 if (IsValid)
                 {
@@ -62,11 +61,11 @@ namespace IconViewer.Logic
             }
         }
 
-        private void Validate(string value)
+        private void Validate(string hex)
         {
             try
             {
-                _ = (Color)ColorConverter.ConvertFromString(value);
+                _ = (Color)ColorConverter.ConvertFromString(hex);
             }
             catch (Exception)
             {
@@ -75,6 +74,26 @@ namespace IconViewer.Logic
             }
 
             IsValid = true;
+        }
+
+        private void Validate(string hex, out string text)
+        {
+            try
+            {
+                if(!String.IsNullOrWhiteSpace(hex) && !hex.StartsWith("#"))
+                    hex = String.Concat("#", hex.Replace("#", String.Empty));
+
+                _ = (Color)ColorConverter.ConvertFromString(hex);
+            }
+            catch (Exception)
+            {
+                IsValid = false;
+                text = hex;
+                return;
+            }
+
+            IsValid = true;
+            text = hex;
         }
 
         private readonly ICommand colorChangedCommand;
@@ -122,10 +141,9 @@ namespace IconViewer.Logic
 
         private void SetPathColor()
         {
-            if (Icons.Count == 0)
-            {
+
+            if (Icons == null || Icons.Count == 0)
                 return;
-            }
 
             Icons.ForEach(icon =>
             {

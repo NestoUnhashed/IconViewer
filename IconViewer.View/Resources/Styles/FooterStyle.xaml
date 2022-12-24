@@ -22,6 +22,7 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Height" Value="40"/>
+        <Setter Property="Width" Value="40"/>
     </Style>
     
     <!-- Footer Button -->
@@ -52,6 +53,39 @@
     </Style>
 
 
+    <!-- ColorPicker Border -->
+    <Style TargetType="Border" x:Key="Footer.ColorPicker.Border" BasedOn="{StaticResource Footer.UIElements.Base}">
+        <Setter Property="Width" Value="25"/>
+        <Setter Property="Background" Value="{Binding ColorManager.Color, UpdateSourceTrigger=PropertyChanged}"/>
+        <Setter Property="BorderThickness" Value="1,1,0,1"/>
+        <Setter Property="BorderBrush" Value="{Binding ElementName=FooterHexBox, Path=BorderBrush}"/>
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=FooterHexBox, Path=IsMouseOver}" Value="true">
+                <Setter Property="BorderBrush" Value="{Binding ElementName=FooterHexBox, Path=BorderBrushOnSelected}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Color Picker -->
+    <Style TargetType="fc:TextBoxPlus" x:Key="Footer.ColorPicker" BasedOn="{StaticResource Footer.UIElements.Base}">
+        <Setter Property="BorderThickness" Value="0,1,1,1"/>
+
+        <Setter Property="Width" Value="75"/>
+        <Setter Property="Text" Value="{Binding ColorManager.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Setter Property="Hint" Value="#HEX"/>
+
+        <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="FontFamily" Value="/Resources/Fonts/Rubik/#Rubik"/>
+        <Setter Property="Foreground" Value="#202020"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Background" Value="{StaticResource Window.Background}"/>
+        <Setter Property="BackgroundOnSelected" Value="{StaticResource Window.Background}"/>
+    </Style>
+    
     
     <!-- Footer Searchbar -->
     <Style TargetType="fc:TextBoxPlus" x:Key="Footer.Searchbar" BasedOn="{StaticResource Footer.UIElements.Base}">
@@ -118,9 +152,7 @@
     </Style>
     
     <!-- Footer.ToolButtons.PathCanvas -->
-    <Style TargetType="Grid" x:Key="Footer.ToolButtons.PathCanvas">
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="Width" Value="30"/>
+    <Style TargetType="Grid" x:Key="Footer.ToolButtons.PathCanvas" BasedOn="{StaticResource Footer.UIElements.Base}">
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
@@ -128,7 +160,7 @@
     <!-- Footer.ToolButtons.PathCanvas.Path -->
     <Style TargetType="Path" x:Key="Footer.ToolButtons.PathCanvas.Path">
         <Setter Property="Stretch" Value="Uniform"/>
-        <Setter Property="StrokeThickness" Value="3"/>
+        <Setter Property="StrokeThickness" Value="0"/>
         <Setter Property="Fill" Value="{StaticResource Button.Background}"/>
         <Setter Property="Stroke" Value="{StaticResource Button.Background}"/>
 

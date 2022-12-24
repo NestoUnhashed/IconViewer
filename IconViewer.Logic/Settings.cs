@@ -7,21 +7,6 @@ namespace IconViewer.Logic
     {
         public Config Config { get; private set; }
 
-        private string color;
-        public string Color
-        {
-            get => color;
-            set
-            {
-                if (color == value)
-                {
-                    return;
-                }
-
-                color = value;
-            }
-        }
-
         private readonly ICommand addPathCommand;
         public ICommand AddPathCommand => addPathCommand ?? new RelayCommand(
                     x => true,
@@ -36,14 +21,12 @@ namespace IconViewer.Logic
 
         private void SaveChanges()
         {
-            Config.DefaultColor = color;
             Config.UpdateConfig();
         }
 
-        public Settings(Config config, string color)
+        public Settings(Config config)
         {
             Config = config ?? throw new ArgumentNullException(nameof(config));
-            Color = color ?? throw new ArgumentNullException(nameof(color));
         }
 
         private void OpenFolderPicker()
